@@ -1,0 +1,30 @@
+.card {
+  --_c: var(--paper);
+  border: 1px solid var(--line); background: var(--panel); border-radius: var(--r);
+  display: flex; flex-direction: column; gap: 12px; min-width: 0;
+  transition: border-color .15s var(--ease), transform .15s var(--ease);
+}
+.p_none { padding: 0; overflow: hidden; }
+.p_sm { padding: 14px; }
+.p_md { padding: 18px; }
+.p_lg { padding: 24px; }
+
+.neutral { --_c: var(--paper); }
+.blue { --_c: var(--blue); }
+.green { --_c: var(--green); }
+.red { --_c: var(--red); }
+.amber { --_c: var(--amber); }
+
+.toned {
+  border-color: color-mix(in srgb, var(--_c) 38%, var(--line));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--_c) 8%, var(--panel)), var(--panel) 65%);
+}
+.interactive:hover { border-color: color-mix(in srgb, var(--_c) 45%, var(--line-2)); }
+.interactive:focus-within { border-color: var(--blue); }
+
+.tile {
+  width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; flex: none;
+  color: var(--_c);
+  background: color-mix(in srgb, var(--_c) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--_c) 30%, var(--line));
+}

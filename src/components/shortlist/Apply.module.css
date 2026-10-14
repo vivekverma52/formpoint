@@ -1,0 +1,5 @@
+.targets { display: flex; gap: 6px; flex-wrap: wrap; }
+.form { display: grid; gap: 12px; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.consent { font-size: 12px; color: var(--faint); }
+.actions { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; margin-top: 4px; }

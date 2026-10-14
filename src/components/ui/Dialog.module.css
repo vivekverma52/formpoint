@@ -1,0 +1,15 @@
+.dialog {
+  border: 1px solid var(--line); border-radius: var(--r-lg); padding: 0;
+  background: var(--panel); color: var(--soft);
+  width: min(100% - 32px, 520px); max-height: min(100dvh - 32px, 760px);
+  box-shadow: var(--shadow-pop);
+}
+.sm { width: min(100% - 32px, 400px); }
+.lg { width: min(100% - 32px, 720px); }
+.dialog::backdrop { background: rgb(0 0 0 / .6); backdrop-filter: blur(2px); }
+.dialog[open] { animation: rise .18s var(--ease); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px) scale(.98); } }
+.body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.title { font-size: 24px; margin-top: 6px; }
+.desc { color: var(--mute); font-size: 14px; margin-top: 6px; }

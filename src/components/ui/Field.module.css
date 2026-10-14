@@ -1,0 +1,12 @@
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.label { font-size: 12px; color: var(--mute); }
+.control {
+  width: 100%; min-width: 0; min-height: 42px;
+  background: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+  transition: border-color .15s;
+}
+.control:hover { border-color: var(--line-2); }
+.control:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 25%, transparent); }
+.control[aria-invalid="true"] { border-color: var(--red); }
+.hint { font-size: 12px; color: var(--faint); }
+.error { font-size: 12px; color: var(--red); }

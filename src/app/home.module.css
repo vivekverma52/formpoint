@@ -1,0 +1,17 @@
+.hero {
+  position: relative; overflow: hidden; border-bottom: 1px solid var(--line);
+  margin-inline: calc(-1 * var(--gl)) calc(-1 * var(--gr)); padding-inline: var(--gl) var(--gr);
+  background:
+    radial-gradient(60% 50% at 50% 0%, color-mix(in srgb, var(--blue) 10%, transparent), transparent 70%),
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 48px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 48px 100%,
+    var(--ink);
+  background-blend-mode: normal;
+}
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, var(--ink)); pointer-events: none; }
+.heroIn { position: relative; z-index: 1; padding-block: 56px 28px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; }
+.h1 { font-size: clamp(38px, 6.4vw, 80px); line-height: .98; font-weight: 800; letter-spacing: -.035em; }
+.h1 span { color: var(--mute); }
+.heroCtas { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.ticker { position: relative; z-index: 1; padding-bottom: 24px; }
+.note { font-size: 12px; color: var(--faint); margin-top: 12px; }

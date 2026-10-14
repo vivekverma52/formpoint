@@ -1,0 +1,10 @@
+.stars { display: inline-flex; gap: 1px; vertical-align: -3px; filter: drop-shadow(0 0 3px rgb(255 164 28 / .35)); }
+.star { position: relative; flex: none; }
+.sm .star, .sm svg { width: 16px; height: 16px; }
+.lg .star, .lg svg { width: 22px; height: 22px; }
+.star svg { display: block; }
+.empty path { fill: rgb(255 164 28 / .1); stroke: #e3912a; stroke-width: 1.3; stroke-linejoin: round; }
+.fill { position: absolute; inset: 0 auto 0 0; overflow: hidden; }
+.edge { stroke: #b8650a; stroke-width: .7; stroke-linejoin: round; }
+/* SMIL ignores CSS reduced-motion, so the glint is hidden instead. */
+@media (prefers-reduced-motion: reduce) { .stars path[fill="url(#fp-star-glint)"] { display: none; } }

@@ -1,0 +1,14 @@
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--line); background: transparent; color: var(--soft);
+  border-radius: 999px; padding: 6px 12px; font-size: 13px; white-space: nowrap; min-height: 32px;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.chip:hover { border-color: var(--line-2); }
+.paper[aria-pressed="true"], .paper[aria-selected="true"] { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.blue[aria-pressed="true"], .blue[aria-selected="true"] { background: var(--blue); color: var(--on-c); border-color: var(--blue); }
+.removable {
+  background: color-mix(in srgb, var(--blue) 12%, transparent);
+  border-color: color-mix(in srgb, var(--blue) 40%, var(--line));
+  color: var(--blue);
+}

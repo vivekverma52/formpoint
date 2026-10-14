@@ -1,0 +1,48 @@
+.btn {
+  --_bg: transparent; --_fg: var(--soft); --_bd: var(--line);
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 1px solid var(--_bd); background: var(--_bg); color: var(--_fg);
+  border-radius: 999px; white-space: nowrap; font-weight: 500; line-height: 1.2;
+  transition: background .15s var(--ease), border-color .15s var(--ease), color .15s var(--ease), filter .15s var(--ease), transform .1s var(--ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.sm { padding: 6px 11px; font-size: 13px; min-height: 32px; }
+.md { padding: 8px 14px; font-size: 14px; min-height: 38px; }
+.lg { padding: 12px 20px; font-size: 15px; min-height: 46px; }
+.full { width: 100%; }
+
+.outline:hover:not(:disabled) { --_bg: var(--panel-2); --_bd: var(--line-2); }
+.ghost { --_bd: transparent; }
+.ghost:hover:not(:disabled) { --_bg: var(--panel-2); }
+.solid { --_bg: var(--paper); --_fg: var(--ink); --_bd: var(--paper); font-weight: 600; }
+.solid:hover:not(:disabled) { --_bg: var(--hi); --_bd: var(--hi); }
+.primary { --_bg: var(--blue); --_fg: var(--on-c); --_bd: var(--blue); font-weight: 600; }
+.success { --_bg: var(--green); --_fg: var(--on-c); --_bd: var(--green); font-weight: 600; }
+.danger { --_bg: transparent; --_fg: var(--red); --_bd: color-mix(in srgb, var(--red) 45%, var(--line)); }
+.primary:hover:not(:disabled), .success:hover:not(:disabled) { filter: brightness(1.08); }
+.danger:hover:not(:disabled) { --_bg: color-mix(in srgb, var(--red) 10%, transparent); }
+
+/* Pressed toggle state for any variant (compare, save, filters). */
+.btn[aria-pressed="true"] { --_bg: var(--paper); --_fg: var(--ink); --_bd: var(--paper); }
+
+.icon { padding: 0; aspect-ratio: 1; }
+.icon_sm { width: 32px; height: 32px; min-height: 32px; }
+.icon_md { width: 38px; height: 38px; min-height: 38px; }
+
+.badge {
+  position: absolute; top: -5px; right: -5px; min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 999px; background: var(--red); color: var(--on-c);
+  font-family: var(--f-mono); font-size: 10px; display: grid; place-items: center; border: 2px solid var(--ink);
+}
+
+.loading { cursor: progress; }
+.spinner {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid currentColor; border-right-color: transparent;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

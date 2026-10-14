@@ -1,0 +1,64 @@
+@import "./tokens.css";
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--soft);
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  /* One side gutter for the whole app; full-bleed bands cancel it with negative margins. */
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+img, svg { max-width: 100%; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+::placeholder { color: var(--faint); }
+
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  color: var(--paper);
+  margin: 0;
+  text-wrap: balance;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+p { margin: 0; }
+
+/* Utilities — kept deliberately small; components own their styling. */
+.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.eyebrow { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--mute); }
+.mute { color: var(--mute); }
+.tone-blue { color: var(--blue); }
+.tone-green { color: var(--green); }
+.tone-red { color: var(--red); }
+.tone-amber { color: var(--amber); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; left: var(--gl); top: -60px; z-index: 100;
+  background: var(--blue); color: var(--on-c); padding: 10px 14px; border-radius: var(--r-sm); font-weight: 600;
+}
+.skip-link:focus { top: 12px; }
+
+/* Sticky header height, used by sticky sub-navs and scroll-margin. */
+@media (max-width: 900px) { :root { --header-h: 64px; } }

@@ -1,0 +1,6 @@
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; max-width: 100%; }
+.seg button { border: 0; background: none; border-radius: 999px; color: var(--mute); white-space: nowrap; transition: background .15s, color .15s; }
+.seg button:hover { color: var(--paper); }
+.seg button[aria-checked="true"] { background: var(--paper); color: var(--ink); }
+.sm button { padding: 5px 12px; font-size: 12px; }
+.md button { padding: 6px 14px; font-size: 13px; }

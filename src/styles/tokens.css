@@ -1,0 +1,65 @@
+/*
+ * FormPoint design tokens.
+ * Dark-first. Monochrome surfaces + a three-colour signal system:
+ *   blue  = act (primary actions, links, focus)
+ *   green = good value (packages, ROI, "safe")
+ *   red   = urgent / saved (deadlines, live, hearts, "reach")
+ *   amber = caution / sponsored / ratings
+ * Components must only read these variables — never hard-code colours.
+ */
+:root {
+  --ink: #0a0a0b;
+  --panel: #111113;
+  --panel-2: #18181b;
+  --hover: #141416;
+  --line: #26262a;
+  --line-2: #3a3a40;
+  --mute: #8a8a93;
+  --faint: #5c5c64;
+  --soft: #c9c9cf;
+  --paper: #f4f4f5;
+  --hi: #ffffff;
+
+  --blue: #6aa6ff;
+  --green: #45d19a;
+  --red: #ff7474;
+  --amber: #f2c562;
+  --on-c: #07111f;
+
+  --f-display: "Bricolage Grotesque Variable", "Helvetica Neue", Arial, sans-serif;
+  --f-body: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: var(--font-geist-mono), ui-monospace, Menlo, Consolas, monospace;
+
+  --r-sm: 8px;
+  --r: 14px;
+  --r-lg: 18px;
+  --gl: max(16px, env(safe-area-inset-left, 0px));
+  --gr: max(16px, env(safe-area-inset-right, 0px));
+  --header-h: 112px;
+  --container: 1240px;
+
+  --shadow-pop: 0 24px 50px -24px rgb(0 0 0 / 0.7);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ink: #f7f7f8; --panel: #ffffff; --panel-2: #efeff1; --hover: #fafafa;
+    --line: #e1e1e5; --line-2: #c4c4ca;
+    --mute: #6a6a73; --faint: #9b9ba3; --soft: #36363c; --paper: #0b0b0c; --hi: #000000;
+    --blue: #1d5fd8; --green: #11804c; --red: #cf2f2f; --amber: #946500; --on-c: #ffffff;
+    --shadow-pop: 0 24px 50px -24px rgb(0 0 0 / 0.25);
+    color-scheme: light;
+  }
+}
+
+:root[data-theme="light"] {
+  --ink: #f7f7f8; --panel: #ffffff; --panel-2: #efeff1; --hover: #fafafa;
+  --line: #e1e1e5; --line-2: #c4c4ca;
+  --mute: #6a6a73; --faint: #9b9ba3; --soft: #36363c; --paper: #0b0b0c; --hi: #000000;
+  --blue: #1d5fd8; --green: #11804c; --red: #cf2f2f; --amber: #946500; --on-c: #ffffff;
+  --shadow-pop: 0 24px 50px -24px rgb(0 0 0 / 0.25);
+  color-scheme: light;
+}

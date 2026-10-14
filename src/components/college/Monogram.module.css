@@ -1,0 +1,8 @@
+.mono {
+  flex: none; display: grid; place-items: center; border: 1px solid var(--line);
+  font-family: var(--f-display); font-weight: 800; color: var(--paper); letter-spacing: -.01em;
+  background: repeating-linear-gradient(135deg, var(--panel-2) 0 6px, var(--panel) 6px 12px);
+}
+.xs { width: 30px; height: 30px; font-size: 9px; border-radius: 7px; }
+.md { width: 52px; height: 52px; font-size: 13px; border-radius: 12px; }
+.xl { width: 84px; height: 84px; font-size: 20px; border-radius: 18px; }

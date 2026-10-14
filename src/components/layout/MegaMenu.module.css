@@ -1,0 +1,22 @@
+.root { position: static; }
+@media (max-width: 420px) { .label { display: none; } }
+.panel {
+  position: absolute; left: 0; right: 0; top: 100%;
+  background: var(--ink); border-bottom: 1px solid var(--line); box-shadow: 0 30px 60px -30px rgb(0 0 0 / .7);
+  padding-left: var(--gl); padding-right: var(--gr);
+}
+.inner { max-width: var(--container); margin-inline: auto; display: grid; grid-template-columns: 200px 1fr; gap: 28px; padding-block: 20px 26px; max-height: 70vh; overflow: auto; }
+.courses { display: flex; flex-direction: column; gap: 2px; border-right: 1px solid var(--line); padding-right: 16px; }
+.courses button { text-align: left; border: 0; background: none; padding: 8px 10px; border-radius: 8px; color: var(--mute); font-size: 14px; }
+.courses button:hover { color: var(--paper); }
+.courses button[aria-selected="true"] { background: color-mix(in srgb, var(--blue) 14%, transparent); color: var(--blue); }
+.cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.cols h4 { font-size: 12px; font-family: var(--f-mono); font-weight: 400; color: var(--mute); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 10px; }
+.cols ul { list-style: none; padding: 0; margin: 0; }
+.cols a { display: block; padding: 5px 0; font-size: 14px; }
+.cols a:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 820px) {
+  .inner { grid-template-columns: 1fr; }
+  .courses { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 0 0 10px; }
+  .cols { grid-template-columns: 1fr 1fr; }
+}

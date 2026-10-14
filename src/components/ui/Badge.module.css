@@ -1,0 +1,28 @@
+.badge {
+  --_c: var(--soft);
+  display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+  color: var(--_c);
+  border: 1px solid color-mix(in srgb, var(--_c) 40%, var(--line));
+  background: color-mix(in srgb, var(--_c) 8%, transparent);
+}
+.neutral { --_c: var(--soft); border-color: var(--line); background: transparent; }
+.blue { --_c: var(--blue); }
+.green { --_c: var(--green); }
+.red { --_c: var(--red); }
+.amber { --_c: var(--amber); }
+
+.tag { font-family: var(--f-mono); font-size: 12px; border-radius: 6px; padding: 3px 8px; }
+.pill {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+  border-radius: 999px; padding: 4px 9px; border-color: currentColor;
+}
+
+.live {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .12em; color: var(--red); font-weight: 500;
+}
+.live::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--red);
+  animation: pulse 1.6s infinite;
+}
+@keyframes pulse { 50% { opacity: .25; } }

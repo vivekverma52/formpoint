@@ -1,0 +1,44 @@
+.container { max-width: var(--container); margin-inline: auto; width: 100%; }
+
+.section { padding-block: 52px; }
+.divider { border-top: 1px solid var(--line); }
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.title { font-size: clamp(26px, 3.6vw, 40px); margin-top: 6px; }
+.action { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.crumbs { padding-top: 20px; font-size: 13px; color: var(--mute); }
+.crumbs ol { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.crumbs li + li::before { content: "/"; margin-right: 8px; color: var(--faint); }
+.crumbs a:hover { color: var(--blue); }
+
+.pageHead { padding-block: 28px 22px; display: flex; flex-direction: column; gap: 8px; }
+.pageHead h1 { font-size: clamp(30px, 4.4vw, 52px); font-weight: 800; letter-spacing: -.03em; margin-top: 4px; }
+.pageHead p { color: var(--mute); max-width: 70ch; }
+
+.empty {
+  border: 1px dashed var(--line-2); border-radius: var(--r); padding: 36px;
+  display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center; color: var(--mute);
+}
+.empty strong { color: var(--paper); font-weight: 600; }
+
+.skeleton {
+  display: block;
+  background: linear-gradient(90deg, var(--panel-2) 0%, var(--line) 50%, var(--panel-2) 100%) 0 0 / 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+.stat {
+  --_c: var(--paper);
+  padding: 16px; border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--_c) 28%, var(--line));
+  background: color-mix(in srgb, var(--_c) 7%, var(--panel));
+  display: flex; flex-direction: column; gap: 6px; min-width: 0;
+}
+.stat b { font-family: var(--f-display); font-size: 28px; font-weight: 600; line-height: 1.1; color: var(--_c); }
+.stat small { font-size: 12px; color: var(--mute); }
+.neutral { --_c: var(--paper); }
+.blue { --_c: var(--blue); }
+.green { --_c: var(--green); }
+.red { --_c: var(--red); }
+.amber { --_c: var(--amber); }

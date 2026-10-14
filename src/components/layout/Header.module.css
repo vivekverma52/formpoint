@@ -1,0 +1,34 @@
+.strip {
+  border-bottom: 1px solid var(--line); font-size: 13px;
+  background: color-mix(in srgb, var(--blue) 7%, var(--ink));
+  margin-inline: calc(-1 * var(--gl)) calc(-1 * var(--gr)); padding-inline: var(--gl) var(--gr);
+}
+.stripInner { max-width: var(--container); margin-inline: auto; display: flex; align-items: center; justify-content: center; gap: 8px 12px; padding-block: 6px; flex-wrap: wrap; text-align: center; }
+.stripCta { color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+.header {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40;
+  background: color-mix(in srgb, var(--ink) 88%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  margin-inline: calc(-1 * var(--gl)) calc(-1 * var(--gr)); padding-inline: var(--gl) var(--gr);
+}
+.row { max-width: var(--container); margin-inline: auto; display: flex; align-items: center; gap: 10px; padding-block: 12px; }
+.logo { display: flex; align-items: center; gap: 9px; font-family: var(--f-display); font-weight: 800; color: var(--paper); font-size: 20px; letter-spacing: -.03em; flex: none; }
+.logo span { color: var(--blue); }
+.lineSq { fill: none; stroke: currentColor; stroke-width: 1.6; }
+.blueSq { fill: var(--blue); }
+.solidSq { fill: currentColor; }
+.search { flex: 1; display: flex; margin-left: 16px; min-width: 0; }
+.spacer { flex: 1; }
+.mSearch { display: none; width: 38px; height: 38px; place-items: center; border: 1px solid var(--line); border-radius: 999px; }
+.mSearch:hover { background: var(--panel-2); }
+
+.quick { max-width: var(--container); margin-inline: auto; display: flex; gap: 4px; align-items: center; padding-bottom: 10px; overflow-x: auto; scrollbar-width: none; }
+.quick::-webkit-scrollbar { display: none; }
+.quick a { font-size: 13px; color: var(--mute); padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+.quick a:hover { color: var(--paper); background: var(--panel-2); }
+.sep { width: 1px; height: 16px; background: var(--line); margin-inline: 6px; flex: none; }
+
+@media (max-width: 900px) { .quick { display: none; } }
+@media (max-width: 760px) { .search { display: none; } .mSearch { display: grid; } }
