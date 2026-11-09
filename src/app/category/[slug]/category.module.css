@@ -1,0 +1,14 @@
+.jump { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 8px; }
+.section { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + var(--header-h)); padding-block: 40px; }
+
+.grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.item {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel);
+}
+.item > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.name { font-weight: 600; color: var(--paper); }
+a.name:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.note { font-size: 13px; color: var(--mute); }
+.more { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 999px; border: 1px solid var(--line); color: var(--mute); }
+.more:hover { color: var(--blue); border-color: var(--blue); }

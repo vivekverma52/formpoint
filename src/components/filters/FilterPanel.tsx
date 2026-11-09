@@ -2,9 +2,9 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { Chip, Icon, Input, Select } from "@/components/ui";
-import { CITIES, COURSES } from "@/lib/data/sample";
+import { CITIES, COURSES, STREAMS } from "@/lib/data/sample";
 import { FEE_BANDS, PACKAGE_STEPS, RATING_STEPS, SORTS, parseFilters, toQuery } from "@/lib/filters";
-import type { CollegeFilters } from "@/lib/types";
+import type { CollegeFilters, Stream } from "@/lib/types";
 import s from "./FilterPanel.module.css";
 
 type Key = Exclude<keyof CollegeFilters, "sort" | "page">;
@@ -36,6 +36,15 @@ export function FilterPanel({ seed = {} }: { seed?: Partial<CollegeFilters> }) {
   const toggle = <K extends Key>(key: K, value: CollegeFilters[K]) =>
     update({ [key]: f[key] === value ? undefined : value } as Partial<CollegeFilters>, seed);
 
+  // Course options follow the active stream (Engineering → B.Tech, M.Tech).
+  const stream = STREAMS.find((x) => x.key === f.stream);
+  const courses = stream ? COURSES.filter((c) => stream.courses.includes(c.key)) : COURSES;
+  const toggleStream = (key: Stream) => {
+    const next = f.stream === key ? undefined : key;
+    const keepCourse = !next || !f.course || STREAMS.find((x) => x.key === next)?.courses.includes(f.course);
+    update({ stream: next, ...(keepCourse ? {} : { course: undefined }) }, seed);
+  };
+
   const group = <K extends Key>(title: string, key: K, opts: readonly { value: CollegeFilters[K]; label: string }[]) => (
     <fieldset className={s.group}>
       <legend>{title}</legend>
@@ -53,7 +62,15 @@ export function FilterPanel({ seed = {} }: { seed?: Partial<CollegeFilters> }) {
         <span><Icon name="filter" /> Filters</span><Icon name="chevronDown" />
       </button>
       <div id="filter-body" className={s.body} hidden={!open}>
-        {group("Course", "course", COURSES.map((c) => ({ value: c.key, label: c.key })))}
+        <fieldset className={s.group}>
+          <legend>Stream</legend>
+          <div className={s.opts}>
+            {STREAMS.map((st) => (
+              <Chip key={st.key} activeTone="blue" pressed={f.stream === st.key} onClick={() => toggleStream(st.key)}>{st.label}</Chip>
+            ))}
+          </div>
+        </fieldset>
+        {group(stream ? `${stream.label} courses` : "Course", "course", courses.map((c) => ({ value: c.key, label: c.key })))}
         {group("City", "city", CITIES.map((c) => ({ value: c.name, label: c.name })))}
         {group("Annual fee", "fee", FEE_BANDS.map((b) => ({ value: b.id, label: b.label })))}
         {group("Average package", "minPackage", PACKAGE_STEPS.map((p) => ({ value: p, label: `${p} LPA +` })))}

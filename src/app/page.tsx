@@ -4,6 +4,7 @@ import { Monogram } from "@/components/college/Monogram";
 import { RankTable } from "@/components/college/RankTable";
 import { SearchBox } from "@/components/layout/SearchBox";
 import { CourseTile, DeadlineCard, ExamCard, NewsCard, ScholarshipCard, StudyPlanCard, ToolCard, UniversityCard } from "@/components/home/HomeCards";
+import { AnnouncementTicker } from "@/components/home/AnnouncementTicker";
 import { CourseTabs } from "@/components/home/CourseTabs";
 import grid from "@/components/home/HomeCards.module.css";
 import { getCollegeIndex, getHome, getTopColleges } from "@/lib/api";
@@ -23,9 +24,13 @@ export default async function HomePage() {
   return (
     <>
       <section className={s.hero}>
+        <AnnouncementTicker>
+          <span>Admissions 2027 are open. Apply to several colleges with one form and track every application in one place.</span>
+          <ApplyButton variant="ghost" size="sm" className={s.stripCta}>Talk to an advisor free</ApplyButton>
+        </AnnouncementTicker>
         <Container className={s.heroIn}>
           <div className="eyebrow">Admissions 2027 · 38,400 colleges · 520 entrance exams</div>
-          <h1 className={s.h1}>Find the right college.<br /><span>Apply with one form.</span></h1>
+          <h1 className={s.h1}>One Platform . Every Stream<br /><span>A Future Without Limits</span></h1>
           <SearchBox index={index} variant="hero" placeholder="Try “IIT Bombay”, “MBA in Bengaluru” or “Chennai”" />
           <div className={s.heroCtas}>
             <ApplyButton variant="success">Get free counselling</ApplyButton>

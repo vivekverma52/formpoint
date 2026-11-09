@@ -1,0 +1,48 @@
+/* Static so the panel positions against the sticky header, not the scrolling row. */
+.root { position: static; }
+
+.bar { display: flex; align-items: flex-start; gap: 4px; max-width: var(--container); margin-inline: auto; }
+.row { flex: 1; min-width: 0; display: flex; gap: 2px; align-items: center; padding-bottom: 10px; overflow-x: auto; scrollbar-width: none; }
+.row::-webkit-scrollbar { display: none; }
+.row > a, .tab { font-size: 14.5px; font-weight: 500; color: var(--soft); padding: 5px 11px; border-radius: 999px; white-space: nowrap; }
+.row > a:hover, .tab:hover { color: var(--paper); background: var(--panel-2); }
+.tab { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; font: inherit; font-size: 14.5px; font-weight: 500; cursor: pointer; }
+.tab svg { transition: transform .15s var(--ease); }
+.tab.on, .tab.on:hover { color: var(--on-c); background: var(--blue); font-weight: 600; }
+.tab.on svg { transform: rotate(180deg); }
+.sep { width: 1px; height: 16px; background: var(--line); margin-inline: 6px; flex: none; }
+
+/* Scroll hints: edge fade + round arrow button, only on the side with more to see. */
+.fadeStart .row { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 64px); mask-image: linear-gradient(90deg, transparent 0, #000 64px); }
+.fadeEnd .row { -webkit-mask-image: linear-gradient(270deg, transparent 0, #000 64px); mask-image: linear-gradient(270deg, transparent 0, #000 64px); }
+.fadeStart.fadeEnd .row {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
+}
+/* Arrows sit beside the row (not over it), so they never cover a category name. */
+.arrow {
+  flex: none; align-self: flex-start; width: 28px; height: 34px; display: grid; place-items: center; cursor: pointer;
+  border: 0; padding: 0; background: none; color: var(--paper);
+}
+.arrow:hover { color: var(--blue); }
+.arrow:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.arrow:disabled { visibility: hidden; }
+
+.panel {
+  position: absolute; left: 0; right: 0; top: 100%;
+  background: var(--ink); border-bottom: 1px solid var(--line); box-shadow: 0 30px 60px -30px rgb(0 0 0 / .7);
+  padding-left: var(--gl); padding-right: var(--gr);
+}
+.inner { max-width: var(--container); margin-inline: auto; padding-block: 18px 24px; max-height: 70vh; overflow: auto; }
+.head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 14px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+.head b { font-family: var(--f-display); font-size: 18px; }
+.all { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--blue); }
+.all:hover { text-decoration: underline; text-underline-offset: 3px; }
+.cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.cols h4 { font-size: 12px; font-family: var(--f-mono); font-weight: 400; color: var(--mute); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 10px; }
+.cols ul { list-style: none; padding: 0; margin: 0; }
+.cols a { display: block; padding: 5px 0; font-size: 14px; }
+.cols a:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 820px) { .cols { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 420px) { .cols { grid-template-columns: 1fr; } }

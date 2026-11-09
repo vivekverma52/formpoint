@@ -1,0 +1,18 @@
+/* Text only (no box). Sits exactly in the hero's second grid row (grid cells are 48px), so the text is
+   centred between two grid lines. Fades in at the right end and out at the left end. */
+.strip {
+  position: relative; z-index: 1; overflow: hidden; width: min(760px, 100%); height: 48px; flex: none;
+  margin-top: 48px; align-self: center;
+  display: flex; align-items: center; font-size: 14px; color: var(--soft);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+}
+.track {
+  display: flex; align-items: center; gap: 14px; width: max-content; white-space: nowrap;
+  padding-left: 100%; animation: ticker-scroll 24s linear infinite;
+}
+.strip:hover .track, .strip:focus-within .track { animation-play-state: paused; }
+@keyframes ticker-scroll { to { transform: translateX(-100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .track { animation: none; padding-left: 0; width: 100%; justify-content: center; }
+}

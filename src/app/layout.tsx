@@ -7,6 +7,7 @@ import "@/styles/globals.css";
 import { StarDefs, themeInitScript } from "@/components/ui";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Intro, introInitScript } from "@/components/layout/Intro";
 import { CompareTray } from "@/components/shortlist/ShortlistControls";
 import { getCollegeIndex } from "@/lib/api";
 import { SITE } from "@/lib/site";
@@ -40,10 +41,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     <html lang="en-IN" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: introInitScript }} />
       </head>
       <body>
         <a href="#main" className="skip-link">Skip to content</a>
         <StarDefs />
+        <Intro />
         <Providers>
           <Header />
           <main id="main">{children}</main>

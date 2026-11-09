@@ -59,6 +59,3 @@ p { margin: 0; }
   background: var(--blue); color: var(--on-c); padding: 10px 14px; border-radius: var(--r-sm); font-weight: 600;
 }
 .skip-link:focus { top: 12px; }
-
-/* Sticky header height, used by sticky sub-navs and scroll-margin. */
-@media (max-width: 900px) { :root { --header-h: 64px; } }

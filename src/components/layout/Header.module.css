@@ -13,22 +13,16 @@
   border-bottom: 1px solid var(--line);
   margin-inline: calc(-1 * var(--gl)) calc(-1 * var(--gr)); padding-inline: var(--gl) var(--gr);
 }
-.row { max-width: var(--container); margin-inline: auto; display: flex; align-items: center; gap: 10px; padding-block: 12px; }
-.logo { display: flex; align-items: center; gap: 9px; font-family: var(--f-display); font-weight: 800; color: var(--paper); font-size: 20px; letter-spacing: -.03em; flex: none; }
-.logo span { color: var(--blue); }
-.lineSq { fill: none; stroke: currentColor; stroke-width: 1.6; }
-.blueSq { fill: var(--blue); }
-.solidSq { fill: currentColor; }
+/* Full width: logo at the far left, actions at the far right. */
+.row { display: flex; align-items: center; gap: 10px; padding-block: 12px; }
+.logo { display: flex; align-items: center; gap: 10px; color: var(--paper); flex: none; }
+.mark { fill: currentColor; flex: none; }
+.blue { fill: var(--blue); }
+.word { font-family: var(--f-body); font-weight: 650; font-size: 21px; letter-spacing: -.02em; line-height: 1; }
+.dot { display: inline-block; width: .2em; height: .2em; margin-left: .06em; border-radius: 50%; background: var(--blue); }
 .search { flex: 1; display: flex; margin-left: 16px; min-width: 0; }
 .spacer { flex: 1; }
 .mSearch { display: none; width: 38px; height: 38px; place-items: center; border: 1px solid var(--line); border-radius: 999px; }
 .mSearch:hover { background: var(--panel-2); }
 
-.quick { max-width: var(--container); margin-inline: auto; display: flex; gap: 4px; align-items: center; padding-bottom: 10px; overflow-x: auto; scrollbar-width: none; }
-.quick::-webkit-scrollbar { display: none; }
-.quick a { font-size: 13px; color: var(--mute); padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
-.quick a:hover { color: var(--paper); background: var(--panel-2); }
-.sep { width: 1px; height: 16px; background: var(--line); margin-inline: 6px; flex: none; }
-
-@media (max-width: 900px) { .quick { display: none; } }
 @media (max-width: 760px) { .search { display: none; } .mSearch { display: grid; } }

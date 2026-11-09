@@ -3,8 +3,7 @@ import { ThemeToggle } from "@/components/ui";
 import { ApplyButton } from "@/components/shortlist/Apply";
 import { ShortlistCount } from "@/components/shortlist/ShortlistControls";
 import { getCollegeIndex } from "@/lib/api";
-import { COURSES } from "@/lib/data/sample";
-import { collegesHref } from "@/lib/filters";
+import { CategoryNav } from "./CategoryNav";
 import { MegaMenu } from "./MegaMenu";
 import { SearchBox } from "./SearchBox";
 import s from "./Header.module.css";
@@ -12,13 +11,13 @@ import s from "./Header.module.css";
 export function Logo() {
   return (
     <Link href="/" className={s.logo} aria-label="FormPoint home">
-      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden>
-        <rect x="3" y="3" width="7" height="7" className={s.lineSq} />
-        <rect x="14" y="3" width="7" height="7" className={s.blueSq} />
-        <rect x="3" y="14" width="7" height="7" className={s.solidSq} />
-        <rect x="14" y="14" width="7" height="7" className={s.lineSq} />
+      {/* "P" mark: rounded P with a blue bar in its bowl and a blue point. */}
+      <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden className={s.mark}>
+        <path fillRule="evenodd" d="M6.5 3H17a8.5 8.5 0 0 1 0 17h-6v7a2 2 0 0 1-2 2H6.5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm4.5 6v5.5h5.5a2.75 2.75 0 0 0 0-5.5Z" />
+        <rect x="9" y="9.75" width="7" height="4" rx="2" className={s.blue} />
+        <circle cx="24.5" cy="26" r="3.5" className={s.blue} />
       </svg>
-      Form<span>Point</span>
+      <span className={s.word}>FormPoint<i className={s.dot} aria-hidden /></span>
     </Link>
   );
 }
@@ -27,12 +26,6 @@ export async function Header() {
   const index = await getCollegeIndex();
   return (
     <>
-      <div className={s.strip}>
-        <div className={s.stripInner}>
-          <span>Admissions 2027 are open. Apply to several colleges with one form and track every application in one place.</span>
-          <ApplyButton variant="ghost" size="sm" className={s.stripCta}>Talk to an advisor free</ApplyButton>
-        </div>
-      </div>
       <header className={s.header}>
         <div className={s.row}>
           <Logo />
@@ -43,14 +36,12 @@ export async function Header() {
           <ShortlistCount />
           <ThemeToggle />
         </div>
-        <nav className={s.quick} aria-label="Popular">
-          {COURSES.slice(0, 7).map((c) => <Link key={c.key} href={collegesHref({ course: c.key })}>{c.key}</Link>)}
-          <span className={s.sep} aria-hidden />
+        <CategoryNav>
           <Link href="/rankings">Rankings</Link>
           <Link href="/predictor">Predictor</Link>
           <Link href="/compare">Compare</Link>
           <Link href="/shortlist">Applications</Link>
-        </nav>
+        </CategoryNav>
       </header>
     </>
   );

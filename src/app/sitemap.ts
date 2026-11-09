@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllCollegeSlugs, searchColleges } from "@/lib/api";
+import { CATEGORIES } from "@/lib/data/categories";
 import { parseFilters } from "@/lib/filters";
 import { allSeoCombos, MIN_RESULTS_TO_INDEX, seoSlug } from "@/lib/seo-paths";
 import { absoluteUrl } from "@/lib/site";
@@ -23,6 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/"), changeFrequency: "daily", priority: 1 },
     { url: absoluteUrl("/predictor"), changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/rankings"), changeFrequency: "monthly", priority: 0.8 },
+    ...CATEGORIES.map((c) => ({ url: absoluteUrl(`/category/${c.slug}`), changeFrequency: "weekly" as const, priority: 0.8 })),
     ...listings,
     ...colleges.map((c) => ({ url: absoluteUrl(`/college/${c.slug}`), lastModified: c.updatedAt, changeFrequency: "weekly" as const, priority: 0.9 })),
   ];

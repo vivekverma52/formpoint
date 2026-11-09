@@ -1,0 +1,54 @@
+/*
+ * Intro timeline (~7.1s):
+ *   0.10–1.80  P, blue bar and blue point fly in from different sides, spinning, and snap together
+ *   1.70–2.20  the assembled mark pulses once
+ *   2.10–3.00  mark moves left to make room
+ *   2.60       blinking caret appears
+ *   3.00–5.25  "FormPoint." is typed, one character every .25s, caret following
+ *   6.30–7.10  overlay fades out, lockup lifts slightly
+ */
+:global(.no-intro) .intro { display: none; }
+
+.intro {
+  position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center;
+  background: var(--ink); color: var(--paper); cursor: pointer;
+  animation: intro-out .8s var(--ease) 6.3s forwards;
+}
+.lockup { display: flex; align-items: center; animation: lockup-out .8s var(--ease) 6.3s forwards; }
+
+/* Pieces fly in from different sides, spinning, and snap together (transform units are SVG user units; the mark is 32 wide). */
+.mark { width: clamp(64px, 12vw, 104px); height: auto; flex: none; overflow: visible; animation: snap .5s ease-out 1.7s; }
+.p, .bar, .point { transform-box: fill-box; transform-origin: center; opacity: 0; animation: piece-in 1.2s cubic-bezier(.3, 1.35, .5, 1) forwards; }
+.p { fill: currentColor; transform: translate(-26px, -22px) rotate(-140deg) scale(.5); animation-delay: .1s; }
+.bar { fill: var(--blue); transform: translate(-34px, 6px) rotate(200deg) scale(.4); animation-delay: .35s; }
+.point { fill: var(--blue); transform: translate(22px, 18px) rotate(260deg) scale(0); animation-delay: .6s; }
+
+/* The word's space opens first (the centred lockup pushes the mark left), then the name is typed:
+   each character appears instantly, one at a time, with a blinking caret following the last one. */
+.word { display: block; overflow: hidden; max-width: 0; font-size: clamp(38px, 7vw, 64px); animation: word-open .9s cubic-bezier(.7, 0, .2, 1) 2.1s forwards; }
+.wordIn {
+  --type-start: 3.0s; /* when the first letter is typed */
+  --type-step: .25s;  /* time between keystrokes */
+  position: relative; display: inline-flex; white-space: nowrap; padding-left: .3em;
+  font-family: var(--f-body); font-weight: 650; letter-spacing: -.02em; line-height: 1.1;
+}
+.ghost { visibility: hidden; display: inline-flex; align-items: baseline; }
+/* The ghost shows every piece at its final size, with no animation. */
+.ghost .letter, .ghost .caret { max-width: none; opacity: 1; animation: none; }
+.ghost .dot { width: .2em; margin-left: .06em; }
+.typed { position: absolute; left: .3em; top: 0; bottom: 0; display: inline-flex; align-items: baseline; }
+/* Untyped characters take no space, so the caret sits right after the last typed one. */
+.letter { display: inline-block; overflow: hidden; max-width: 0; opacity: 0; animation: type-key 0s linear calc(var(--type-start) + var(--i) * var(--type-step)) forwards; }
+.dot { display: inline-block; width: .2em; height: .2em; margin-left: .06em; border-radius: 50%; background: var(--blue); flex: none; }
+.typed .dot { width: 0; margin-left: 0; animation-name: type-dot; }
+.caret { align-self: center; width: .07em; height: .95em; margin-left: .05em; background: var(--blue); border-radius: 1px; opacity: 0; animation: caret-on 0s 2.6s forwards, blink .9s steps(1) 2.6s infinite; }
+
+@keyframes piece-in { 30% { opacity: 1; } to { opacity: 1; transform: none; } }
+@keyframes snap { 40% { transform: scale(1.08); } }
+@keyframes word-open { to { max-width: 6.5em; } }
+@keyframes type-key { to { max-width: 1.2em; opacity: 1; } }
+@keyframes type-dot { to { width: .2em; margin-left: .06em; opacity: 1; max-width: 1em; } }
+@keyframes caret-on { to { opacity: 1; } }
+@keyframes blink { 50% { visibility: hidden; } }
+@keyframes intro-out { to { opacity: 0; visibility: hidden; } }
+@keyframes lockup-out { to { transform: translateY(-12px) scale(.96); } }

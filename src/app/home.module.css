@@ -3,15 +3,58 @@
   margin-inline: calc(-1 * var(--gl)) calc(-1 * var(--gr)); padding-inline: var(--gl) var(--gr);
   background:
     radial-gradient(60% 50% at 50% 0%, color-mix(in srgb, var(--blue) 10%, transparent), transparent 70%),
-    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 48px,
-    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 48px 100%,
     var(--ink);
-  background-blend-mode: normal;
+  /* Fills the first screen below the sticky header: headline block centred, news cards along the bottom. */
+  display: flex; flex-direction: column; min-height: calc(100svh - var(--header-h));
 }
-.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, var(--ink)); pointer-events: none; }
-.heroIn { position: relative; z-index: 1; padding-block: 56px 28px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; }
-.h1 { font-size: clamp(38px, 6.4vw, 80px); line-height: .98; font-weight: 800; letter-spacing: -.035em; }
+/* Grid fills the hero from just under the header. */
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(var(--hero-grid) 1px, transparent 1px) 0 0 / 100% 48px,
+    linear-gradient(90deg, var(--hero-grid) 1px, transparent 1px) 0 0 / 48px 100%;
+  /* Lines drift in parallel: horizontal lines move down, vertical lines move right. One 48px cell per loop, so it's seamless. */
+  animation: grid-drift 6s linear infinite;
+  /* Layer 1: faint in the centre, strongest at the edges.
+     Layer 2 (subtracted): a window that follows the announcement text (AnnouncementTicker sets --dim-*),
+     so only the lines behind the text dim and they return one by one as it passes. The background is untouched. */
+  -webkit-mask-image:
+    radial-gradient(ellipse at center, rgb(0 0 0 / .15), #000 85%),
+    linear-gradient(90deg, transparent var(--dim-l, -9999px), rgb(0 0 0 / .8) calc(var(--dim-l, -9999px) + 24px), rgb(0 0 0 / .8) calc(var(--dim-r, -9999px) - 24px), transparent var(--dim-r, -9999px));
+  -webkit-mask-size: 100% 100%, 100% var(--dim-h, 0px);
+  -webkit-mask-position: 0 0, 0 var(--dim-t, 0px);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-composite: source-out;
+  mask-image:
+    radial-gradient(ellipse at center, rgb(0 0 0 / .15), #000 85%),
+    linear-gradient(90deg, transparent var(--dim-l, -9999px), rgb(0 0 0 / .8) calc(var(--dim-l, -9999px) + 24px), rgb(0 0 0 / .8) calc(var(--dim-r, -9999px) - 24px), transparent var(--dim-r, -9999px));
+  mask-size: 100% 100%, 100% var(--dim-h, 0px);
+  mask-position: 0 0, 0 var(--dim-t, 0px);
+  mask-repeat: no-repeat;
+  mask-composite: subtract;
+}
+.stripCta { color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.heroIn { position: relative; z-index: 1; flex: 1; padding-block: clamp(28px, 6vh, 64px) clamp(20px, 4vh, 40px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 22px; }
+.h1 { position: relative; isolation: isolate; font-size: clamp(40px, 6.2vw, 76px); line-height: .98; font-weight: 800; letter-spacing: -.035em; }
+/* Clears the grid only right behind the words (it stays above and below), plus a soft glow.
+   White light on dark, blue tint on light. */
+.h1::before {
+  content: ""; position: absolute; inset: -12% -6%; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(closest-side, var(--hero-glow), transparent),
+    radial-gradient(closest-side, var(--ink) 70%, transparent);
+}
+.hero { --hero-glow: rgb(255 255 255 / .09); --hero-grid: var(--line-2); }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .hero { --hero-glow: color-mix(in srgb, var(--blue) 12%, transparent); } }
+:root[data-theme="light"] .hero { --hero-glow: color-mix(in srgb, var(--blue) 12%, transparent); }
 .h1 span { color: var(--mute); }
 .heroCtas { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.ticker { position: relative; z-index: 1; padding-bottom: 24px; }
+.ticker { position: relative; z-index: 1; padding-bottom: clamp(20px, 4vh, 36px); }
+/* Short laptop screens: tighten so the news cards still fit on the first screen. */
+@media (max-height: 820px) and (min-width: 761px) {
+  .heroIn { gap: 16px; }
+  .h1 { font-size: clamp(40px, 5.8vw, 70px); }
+}
 .note { font-size: 12px; color: var(--faint); margin-top: 12px; }
+@keyframes grid-drift { to { background-position: 0 48px, 48px 0; } }
+@media (prefers-reduced-motion: reduce) { .hero::before { animation: none; } }
